@@ -1,0 +1,10 @@
+Sample project configurd with GNU autotools used to
+test my custom Autoconf modules.
+
+Git repository with the modules is available at
+https://github.com/mloskot/autotools-modules/
+
+I submit my modules to the GNU Autoconf Archive at
+https://www.gnu.org/software/autoconf-archive/
+
+Author: Mateusz Łoskot <mateusz@loskot.net>
