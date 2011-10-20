@@ -124,6 +124,7 @@ AC_DEFUN([AX_LIB_GDAL],
             AC_MSG_RESULT([yes])
         else
             AC_MSG_RESULT([no])
+            AC_MSG_WARN([Found GDAL $GDAL_VERSION, which is older than required $gdal_version_req. Possible compilation failure.])
         fi
     fi
 
