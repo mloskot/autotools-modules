@@ -10,15 +10,15 @@ dnl required version passed, then macro does not run version test.
 dnl
 dnl The --with-gdal option takes complete path to gdal-config utility,
 dnl
-dnl This macro calls:
+dnl This macro calls AC_SUBST for:
 dnl
-dnl   AC_SUBST(GDAL_VERSION)
-dnl   AC_SUBST(GDAL_CFLAGS)
-dnl   AC_SUBST(GDAL_LDFLAGS)
-dnl   AC_SUBST(GDAL_DEP_LDFLAGS)
-dnl   AC_SUBST(GDAL_OGR_ENABLED)
+dnl   GDAL_VERSION
+dnl   GDAL_CFLAGS
+dnl   GDAL_LDFLAGS
+dnl   GDAL_DEP_LDFLAGS
+dnl   GDAL_OGR_ENABLED
 dnl
-dnl And sets:
+dnl and AC_DEFINE for:
 dnl
 dnl   HAVE_GDAL
 dnl   HAVE_GDAL_OGR
