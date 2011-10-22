@@ -8,7 +8,7 @@ AM_MAINTAINER_MODE
 
 AC_PROG_CXX
 
-AX_LIB_GDAL([1.8.0])
+AX_LIB_GDAL([1.8.0]) dnl Use 2.8.0 to test lookup failure
 
 AC_OUTPUT([
     Makefile

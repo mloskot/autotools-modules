@@ -26,6 +26,7 @@ dnl
 dnl @category InstalledPackages
 dnl @category Cxx
 dnl @author Mateusz Loskot <mateusz@loskot.net>
+dnl @author Alessandro Candini <candini@meeo.it>
 dnl @version $Date$
 dnl @license AllPermissive
 dnl
@@ -33,16 +34,23 @@ dnl $Id$
 dnl
 AC_DEFUN([AX_LIB_GDAL],
 [
+    dnl If gdal-config path is not given in ---with-gdal option,
+    dnl check if it is present in the system anyway
     AC_ARG_WITH([gdal],
         AC_HELP_STRING([--with-gdal=@<:@ARG@:>@],
             [Specify full path to gdal-config script]),
-	    [ac_gdal_config_path=$withval])
+        [ac_gdal_config_path=$withval],
+        [gdal_config_system=check])
 
-    ac_gdal_config_path=`dirname $ac_gdal_config_path 2> /dev/null`
-    AC_PATH_PROG(GDAL_CONFIG, gdal-config, no, $ac_gdal_config_path)
+    dnl if gdal-config is present in the system, fill the ac_gdal_config_path variable with it full path
+    AS_IF([test "x$gdal_config_system" = xcheck], 
+          [AC_PATH_PROG([GDAL_CONFIG], [gdal-config])],
+          [AC_PATH_PROG([GDAL_CONFIG], [gdal-config],
+              [no], [`dirname $ac_gdal_config_path 2> /dev/null`])]
+    )
 
     if test ! -x "$GDAL_CONFIG"; then
-        AC_MSG_ERROR([$GDAL_CONFIG does not exist or it is not an exectuable file])
+        AC_MSG_ERROR([gdal-config does not exist or it is not an exectuable file])
             GDAL_CONFIG="no"
             found_gdal="no"
     fi
@@ -124,7 +132,7 @@ AC_DEFUN([AX_LIB_GDAL],
             AC_MSG_RESULT([yes])
         else
             AC_MSG_RESULT([no])
-            AC_MSG_WARN([Found GDAL $GDAL_VERSION, which is older than required $gdal_version_req. Possible compilation failure.])
+	    AC_MSG_ERROR([GDAL $GDAL_VERSION found, but required version is $gdal_version_req])
         fi
     fi
 
