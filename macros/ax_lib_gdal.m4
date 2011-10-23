@@ -1,37 +1,46 @@
-dnl $Id$
-dnl
-dnl @synopsis AX_LIB_GDAL([MINIMUM-VERSION])
-dnl
-dnl This macro provides tests of availability of GDAL/OGR library
-dnl of particular version or newer.
-dnl 
-dnl AX_LIB_GDAL macro takes only one argument which is optional. If there is no 
-dnl required version passed, then macro does not run version test.
-dnl
-dnl The --with-gdal option takes complete path to gdal-config utility,
-dnl
-dnl This macro calls AC_SUBST for:
-dnl
-dnl   GDAL_VERSION
-dnl   GDAL_CFLAGS
-dnl   GDAL_LDFLAGS
-dnl   GDAL_DEP_LDFLAGS
-dnl   GDAL_OGR_ENABLED
-dnl
-dnl and AC_DEFINE for:
-dnl
-dnl   HAVE_GDAL
-dnl   HAVE_GDAL_OGR
-dnl
-dnl @category InstalledPackages
-dnl @category Cxx
-dnl @author Mateusz Loskot <mateusz@loskot.net>
-dnl @author Alessandro Candini <candini@meeo.it>
-dnl @version $Date$
-dnl @license AllPermissive
-dnl
-dnl $Id$
-dnl
+# ===========================================================================
+#        http://www.gnu.org/software/autoconf-archive/ax_lib_gdal.html
+# ===========================================================================
+#
+# SYNOPSIS
+#
+#   AX_LIB_GDAL([MINIMUM-VERSION])
+#
+# DESCRIPTION
+#
+#   This macro provides tests of availability of GDAL/OGR library of
+#   particular version or newer.
+#
+#   AX_LIB_GDAL macro takes only one argument which is optional. If there is
+#   no required version passed, then macro does not run version test.
+#
+#   The --with-gdal option takes complete path to gdal-config utility,
+#
+#   This macro calls AC_SUBST for:
+#
+#     GDAL_VERSION
+#     GDAL_CFLAGS
+#     GDAL_LDFLAGS
+#     GDAL_DEP_LDFLAGS
+#     GDAL_OGR_ENABLED
+#
+#   and AC_DEFINE for:
+#
+#     HAVE_GDAL
+#     HAVE_GDAL_OGR
+#
+# LICENSE
+#
+#   Copyright (c) 2011 Mateusz Loskot <mateusz@loskot.net>
+#   Copyright (c) 2011 Alessandro Candini <candini@meeo.it>
+#
+#   Copying and distribution of this file, with or without modification, are
+#   permitted in any medium without royalty provided the copyright notice
+#   and this notice are preserved. This file is offered as-is, without any
+#   warranty.
+
+#serial 1
+
 AC_DEFUN([AX_LIB_GDAL],
 [
     dnl If gdal-config path is not given in ---with-gdal option,
@@ -43,7 +52,7 @@ AC_DEFUN([AX_LIB_GDAL],
         [gdal_config_system=check])
 
     dnl if gdal-config is present in the system, fill the ac_gdal_config_path variable with it full path
-    AS_IF([test "x$gdal_config_system" = xcheck], 
+    AS_IF([test "x$gdal_config_system" = xcheck],
           [AC_PATH_PROG([GDAL_CONFIG], [gdal-config])],
           [AC_PATH_PROG([GDAL_CONFIG], [gdal-config],
               [no], [`dirname $ac_gdal_config_path 2> /dev/null`])]
@@ -54,13 +63,13 @@ AC_DEFUN([AX_LIB_GDAL],
             GDAL_CONFIG="no"
             found_gdal="no"
     fi
-    
-    GDAL_VERSION=""    
+
+    GDAL_VERSION=""
     GDAL_CFLAGS=""
     GDAL_LDFLAGS=""
     GDAL_DEP_LDFLAGS=""
     GDAL_OGR_ENABLED=""
-    
+
 
     dnl
     dnl Check GDAL library (libgdal)
@@ -80,7 +89,7 @@ AC_DEFUN([AX_LIB_GDAL],
     else
         found_gdal="no"
     fi
-    
+
     AC_MSG_RESULT([$found_gdal])
 
     if test "$found_gdal" = "yes"; then
@@ -91,16 +100,16 @@ AC_DEFUN([AX_LIB_GDAL],
 
         AC_MSG_RESULT([$GDAL_OGR_ENABLED])
     fi
-    
+
     dnl
     dnl Check if required version of GDAL is available
     dnl
-    
+
     gdal_version_req=ifelse([$1], [], [], [$1])
     if test "$found_gdal" = "yes" -a -n "$gdal_version_req"; then
 
         AC_MSG_CHECKING([if GDAL version is >= $gdal_version_req])
-        
+
         dnl Decompose required version string of GDAL
         dnl and calculate its number representation
         gdal_version_req_major=`expr $gdal_version_req : '\([[0-9]]*\)'`
