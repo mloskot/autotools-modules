@@ -86,7 +86,7 @@ AC_DEFUN([AX_PROG_DOXYGEN],
             WANT_DOXYGEN_VERSION=`expr $doxygen_version_req_major \* 100000 \+  $doxygen_version_req_minor \* 100 \+ $doxygen_version_req_micro`
             FOUND_DOXYGEN_VERSION=`expr $doxygen_version_major \* 100000 \+  $doxygen_version_minor \* 100 \+ $doxygen_version_micro`
 
-            if test $WANT_DOXYGEN_VERSION >= $FOUND_DOXYGEN_VERSION; then
+            if test $WANT_DOXYGEN_VERSION -le $FOUND_DOXYGEN_VERSION; then
                 DOXYGEN_VERSION=$FOUND_DOXYGEN_VERSION
             else
                 # Required Doxygen not found
