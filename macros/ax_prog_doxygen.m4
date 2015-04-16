@@ -90,7 +90,7 @@ AC_DEFUN([AX_PROG_DOXYGEN],
                 DOXYGEN_VERSION=$FOUND_DOXYGEN_VERSION
             else
                 # Required Doxygen not found
-                AC_MSG_ERROR([Doxygen $FOUND_DOXYGEN_VERSION found! Required version is $WANTED_DOXYGEN_VERSION])
+                AC_MSG_ERROR([Doxygen $FOUND_DOXYGEN_VERSION found! Required version is $WANT_DOXYGEN_VERSION])
             fi
 
             # ACTION-IF-FOUND
